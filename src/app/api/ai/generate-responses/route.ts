@@ -175,12 +175,17 @@ async function generateResponseForTone(
   
   const finalSignature = easterEggSignature || signature;
   
-  // Easter Egg: "bester Döner ever" Detection
-  const hasBesterDoenerEver = reviewText.toLowerCase().includes('bester') && 
-    (reviewText.toLowerCase().includes('döner') || reviewText.toLowerCase().includes('kebab'));
+  // Easter Egg Detection (alle Phrasen)
+  const easterEgg = detectEasterEggs(reviewText, languageCode);
+  const easterEggResponse = easterEgg && kiezScore !== undefined
+    ? generateEasterEggResponse(easterEgg.type, kiezScore, languageCode)
+    : null;
+  
+  // Legacy: "bester Döner ever" Detection (für Kompatibilität)
+  const hasBesterDoenerEver = easterEgg?.type === 'bester_doener_ever';
   
   // Business-Kategorie erkennen für passende Einladung
-  const businessCategory = detectBusinessCategory(businessName, body.placeTypes);
+  const businessCategory = detectBusinessCategory(businessName, placeTypes);
   const invitationLine = kiezScore !== undefined
     ? (languageCode.toLowerCase() === 'en' 
         ? getInvitationLineEnglish(businessCategory, kiezScore, isPositive)
