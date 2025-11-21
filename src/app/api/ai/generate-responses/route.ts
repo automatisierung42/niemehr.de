@@ -6,6 +6,7 @@ import { getContextualOpener } from '@/core/humanizers/openers';
 import { generateSignature, getEasterEggSignature, detectBusinessType } from '@/core/humanizers/signatures';
 import { getInvitationLine, getInvitationLineEnglish } from '@/core/humanizers/invitation';
 import { detectBusinessCategory } from '@/core/business/categories';
+import { detectEasterEggs, generateEasterEggResponse } from '@/core/humanizers/easterEggs';
 
 // Anthropic (Claude) API Konfiguration - EINDEUTIG
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY;
@@ -210,11 +211,13 @@ ABSOLUTE REGELN (keine Ausnahme):
 4. STRUKTUR (immer exakt):
    ${opener ? `- OPENER: Beginne mit: "${opener}"` : '- Satz 1: Emotion des Kunden spiegeln (Dank oder Empathie)'}
    - Satz 2: Wertschätzung zeigen ODER konkrete Lösung nennen
-   ${hasBesterDoenerEver ? '- EASTER EGG: Review enthält "bester Döner ever" → Antwort: "Bester ever? Na dann legen wir nächstes Mal noch einen drauf!"' : ''}
+   ${easterEggResponse ? `- EASTER EGG: Review enthält "${easterEgg.type}" → Verwende diese Antwort: "${easterEggResponse}"` : ''}
    ${invitationLine ? `- EINLADUNG: Verwende diese Einladungs-Zeile: "${invitationLine}"` : '- Satz 3 (falls Platz): persönliche Einladung (NICHT "Come back soon" bei Behörden/Anwälten/Bestattern!)'}
    ${finalSignature ? `- SIGNATUR: Beende mit: "${finalSignature}"` : '- Signatur: echter Vorname oder "& Team"'}
    
-   WICHTIG: Die Einladungs-Zeile ist bereits passend für die Business-Kategorie gewählt. Verwende sie EXAKT so.
+   WICHTIG: 
+   - Die Einladungs-Zeile ist bereits passend für die Business-Kategorie gewählt. Verwende sie EXAKT so.
+   - Bei Easter Eggs: Integriere die Easter Egg Antwort natürlich in den Textfluss.
 
 5. TON: 90% warm & freundlich, 10% professionell – niemals steif, abweisend oder belehrend
 
@@ -370,7 +373,7 @@ export async function POST(request: NextRequest) {
       try {
         console.log('[AI GENERATION] Starte Anthropic (Claude) API Calls für alle 3 Töne...');
         [friendly, professional, witty] = await Promise.all([
-          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'friendly', kiezScore, signatureNames, businessType),
+          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'friendly', kiezScore, signatureNames, businessType, body.placeTypes),
           generateResponseForTone(
             reviewText,
             reviewRating,
@@ -379,9 +382,10 @@ export async function POST(request: NextRequest) {
             'professional',
             kiezScore,
             signatureNames,
-            businessType
+            businessType,
+            body.placeTypes
           ),
-          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'witty', kiezScore, signatureNames, businessType),
+          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'witty', kiezScore, signatureNames, businessType, body.placeTypes),
         ]);
         console.log('[AI GENERATION SUCCESS] Antworten für alle 3 strategischen Reviews erstellt und gesendet.');
       } catch (aiError: any) {
