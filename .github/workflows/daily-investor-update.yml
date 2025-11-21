@@ -1,0 +1,48 @@
+name: Daily Investor Update (6:30 MEZ)
+
+on:
+  schedule:
+    - cron: '30 5 * * *'  # 5:30 UTC = 6:30 MEZ (Winter) / 6:30 MESZ (Sommer)
+  workflow_dispatch:  # Manueller Trigger für Tests
+
+env:
+  TZ: Europe/Berlin  # Automatische Zeitzone - keine manuelle Umstellung nötig!
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 100  # Mehr Git-Historie für bessere Summaries
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run Daily Update Script
+        run: |
+          echo "🚀 Starte Investor-Update..."
+          node scripts/daily-investor-update.js
+      
+      - name: Commit & Push Changes
+        run: |
+          git config user.name "niemehr.de Bot"
+          git config user.email "bot@niemehr.de"
+          git add docs/investor_update_7_tage.md
+          
+          # Nur committen wenn Änderungen vorhanden
+          if git diff --staged --quiet; then
+            echo "✅ Keine Änderungen - nichts zu committen"
+          else
+            git commit -m "📊 Daily Investor Update $(date '+%d.%m.%Y %H:%M')"
+            git push
+            echo "✅ Änderungen gepusht"
+          fi
+

@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                                String     @id @default(cuid())
+  email                             String     @unique
+  name                              String?
+  image                             String?
+  autoPilotEnabled                  Boolean    @default(false)
+  autoPilotActivatedAt              DateTime?
+  autoRepliesCount                  Int        @default(0)
+  manualRepliesCount                Int        @default(0)
+  // Signatur-Felder
+  signatureNames                    String[]   @default([])
+  signatureStyle                    String?    // "friendly" | "professional" | "witty" | "none"
+  signatureTemplate                 String?    // Der finale, gewählte Text
+  hasCompletedSignatureOnboarding   Boolean    @default(false)
+  createdAt                         DateTime   @default(now())
+  updatedAt                         DateTime   @updatedAt
+  businesses                        Business[]
+
+  @@map("users")
+}
+
+model Business {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Existing fields
+  name            String
+  businessName    String?  // Alias für name, für Kompatibilität
+  googlePlaceId  String   @unique
+  ratingBoost    Float    @default(0.00)
+  lastSyncAt     DateTime?
+  
+  // SMS Settings
+  phoneNumber     String
+  notificationMode String  @default("immediate") // "immediate" | "scheduled"
+  scheduledTime   String?  // "08:00-10:00" (optional)
+  preferredTone   String?  @default("professional") // "professional" | "friendly" | "casual"
+  
+  // Kiez-Score (0-100): Lockerheit des Standorts für Antwort-Generierung
+  kiezScore       Int?     @default(50) // Default: 50 (sicheres Mittel)
+  
+  // Timestamps
+  connectedAt     DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  reviews         Review[]
+  reviewApprovals ReviewApproval[]
+
+  @@map("businesses")
+}
+
+model Review {
+  id             String         @id @default(uuid())
+  googleReviewId String         @unique
+  businessId     String
+  business       Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  authorName     String
+  rating         Int
+  text           String?        @db.Text
+  time           DateTime
+  responseStatus ResponseStatus @default(PENDING)
+  kiSummary      String?        @db.Text
+  kiResponseText String?        @db.Text
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  languageCode   String         @default("de")
+
+  @@index([businessId])
+  @@index([responseStatus])
+  @@map("reviews")
+}
+
+model ReviewApproval {
+  id              String   @id @default(cuid())
+  businessId      String
+  business        Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  // Review Info
+  googleReviewId  String   @unique
+  reviewText      String   @db.Text
+  reviewRating    Int
+  reviewAuthor    String
+  reviewDate      DateTime
+  
+  // AI Response (nur EINE!)
+  finalResponse   String   @db.Text
+  
+  // SMS Tracking
+  smsSentAt       DateTime?
+  smsMessageSid   String?
+  userResponse    String?  // "1", "ja", "👍", etc.
+  
+  // Status
+  status          String   @default("pending") // pending | approved | auto_approved | failed
+  responsePostedAt DateTime?
+  expiresAt       DateTime // 60 Min nach SMS
+  
+  // Timestamps
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([businessId, status])
+  @@index([expiresAt])
+  @@map("review_approvals")
+}
+
+enum ResponseStatus {
+  PENDING
+  READY_TO_APPROVE
+  APPROVED_PENDING
+  POSTED
+  SKIP_MANUAL
+}
+

@@ -1,0 +1,492 @@
+# Instructions for Cursor AI - niemehr.de Project
+
+## 🔴 CRITICAL: EU Compliance Protocol
+
+### 1. Save KI-Protokoll to Project
+
+**ACTION REQUIRED:** Save the complete KI-Protokoll document to the following location:
+
+```
+/docs/compliance/KI_PROTOKOLL_EU_COMPLIANCE.md
+```
+
+**If the directory doesn't exist, create it:**
+
+```bash
+mkdir -p docs/compliance
+```
+
+---
+
+## 2. Mandatory Compliance Checks
+
+### Before ANY Code Implementation or Modification:
+
+**YOU MUST:**
+
+1. ✅ **Read** `/docs/compliance/KI_PROTOKOLL_EU_COMPLIANCE.md`
+
+2. ✅ **Check** if the planned change affects any of these areas:
+
+   - User data processing (personal data, reviews, business data)
+
+   - AI-generated content (review responses)
+
+   - API integrations (OpenAI, Google)
+
+   - User authentication or authorization
+
+   - Data storage or retention
+
+   - UI elements related to transparency or consent
+
+3. ✅ **Verify** the implementation against relevant sections in the KI-Protokoll
+
+4. ✅ **Flag** any potential compliance issues BEFORE implementing
+
+---
+
+## 3. Compliance Checklist for Every Feature
+
+When implementing or modifying features, explicitly check:
+
+### Data Processing (DSGVO)
+
+- [ ] Is a legal basis documented? (Art. 6 DSGVO - see Section 3.2)
+
+- [ ] Is data minimization applied? (collect only necessary data)
+
+- [ ] Is there proper encryption? (at rest and in transit)
+
+- [ ] Are retention periods defined?
+
+- [ ] Can users exercise their rights? (export, delete, access)
+
+### AI-Generated Content (AI Act)
+
+- [ ] Is there Human-in-the-Loop? (manual approval before publishing)
+
+- [ ] Is AI usage transparently communicated to users?
+
+- [ ] Are there appropriate disclaimers in the UI?
+
+- [ ] Does the prompt include bias-prevention instructions?
+
+- [ ] Are there guardrails for sensitive industries? (medical, legal)
+
+### Third-Party Integrations
+
+- [ ] Is there a Data Processing Agreement (DPA) in place?
+
+- [ ] Is data transfer to third parties documented?
+
+- [ ] Are API credentials securely stored?
+
+- [ ] Is there proper error handling to avoid data leaks?
+
+### UI/UX Compliance
+
+- [ ] Are required disclaimers visible? ("AI-generated", "Review before publishing")
+
+- [ ] Is there informed consent for optional features?
+
+- [ ] Are privacy settings accessible?
+
+- [ ] Is there a clear opt-in (not opt-out) for non-essential features?
+
+---
+
+## 4. High-Priority Compliance Areas
+
+### 🚨 PHASE 1 (Pre-Launch) - BLOCKING ISSUES
+
+These MUST be implemented before public launch:
+
+#### A) Legal Documents
+
+```typescript
+// Required pages/components:
+
+- /pages/privacy-policy.tsx     // Datenschutzerklärung
+
+- /pages/terms.tsx              // AGBs with liability disclaimer
+
+- /components/CookieBanner.tsx  // GDPR-compliant cookie consent
+```
+
+**Cursor: When creating these files, reference Section 3.4 of KI-Protokoll**
+
+#### B) Transparency in Dashboard
+
+```typescript
+// Required UI elements in dashboard:
+
+- AI-generated content disclaimer (visible on every AI response)
+
+- "Review before publishing" warning
+
+- "You are responsible for published content" notice
+```
+
+**Cursor: When working on dashboard UI, reference Section 3.1 of KI-Protokoll**
+
+#### C) OpenAI Integration
+
+```typescript
+// Required before production use:
+
+- Sign DPA with OpenAI (manual step, document in /docs/compliance/DPA_OPENAI.pdf)
+
+- Implement zero-data-retention if available
+
+- Add proper error handling (no data leaks in logs)
+```
+
+**Cursor: When modifying OpenAI API calls, reference Section 3.2, Decision 4**
+
+#### D) Data Minimization
+
+```typescript
+// Review all database models:
+
+- Store ONLY necessary fields from Google API
+
+- Don't store profile images unless required
+
+- Implement automatic deletion after account closure
+```
+
+**Cursor: When creating/modifying Prisma schemas, reference Section 3.2, Decision 6**
+
+---
+
+## 5. Code Implementation Guidelines
+
+### For AI Response Generation:
+
+```typescript
+// REQUIRED in every prompt to OpenAI:
+
+const systemPrompt = `
+You are a professional review response assistant.
+
+CRITICAL RULES:
+- Be respectful and professional at all times
+- NEVER include discriminatory, offensive, or stereotypical language
+- NEVER provide medical advice or diagnoses
+- NEVER provide legal advice
+- NEVER make promises about discounts or offers without explicit approval
+- Keep responses concise and genuine
+- Adapt tone based on review sentiment
+
+The user will manually review and approve this response before publishing.
+`;
+```
+
+**Reference: Section 3.3, Decision 8 in KI-Protokoll**
+
+### For Data Storage:
+
+```typescript
+// REQUIRED for all user data:
+
+interface UserDataRetention {
+  createdAt: Date;
+  // Add TTL/expiry for non-essential data
+  expiresAt?: Date;
+  // Flag for deletion requests
+  deletionRequestedAt?: Date;
+}
+
+// Implement automatic cleanup:
+// DELETE data 30 days after account deletion
+```
+
+**Reference: Section 3.2, Decision 5 in KI-Protokoll**
+
+### For UI Disclaimers:
+
+```typescript
+// REQUIRED on AI response preview:
+
+<div className="ai-disclaimer">
+  <InfoIcon />
+  <span>
+    Dieser Antwortvorschlag wurde KI-gestützt erstellt. 
+    Bitte überprüfen Sie den Inhalt, bevor Sie ihn veröffentlichen. 
+    Sie sind für die finale Antwort verantwortlich.
+  </span>
+</div>
+```
+
+**Reference: Section 3.3, Decision 7 in KI-Protokoll**
+
+---
+
+## 6. Review Existing Code
+
+### Immediate Audit Required:
+
+1. **Check all API routes** that handle personal data:
+
+   ```bash
+   # Review these files:
+
+   app/api/auth/*
+   app/api/reviews/*
+   app/api/responses/*
+   ```
+
+   - Verify legal basis for data processing
+
+   - Check for proper error handling (no data leaks)
+
+   - Ensure proper authentication/authorization
+
+2. **Check OpenAI integration**:
+
+   ```bash
+   # Find all OpenAI API calls:
+
+   grep -r "openai" app/
+   ```
+
+   - Ensure no sensitive data in logs
+
+   - Verify proper error handling
+
+   - Check if DPA requirements are met
+
+3. **Check database schema**:
+
+   ```bash
+   # Review:
+
+   prisma/schema.prisma
+   ```
+
+   - Are we collecting only necessary data?
+
+   - Are there retention periods defined?
+
+   - Can users request deletion?
+
+4. **Check for missing disclaimers**:
+
+   ```bash
+   # Review all dashboard components:
+
+   app/dashboard/*
+   components/*
+   ```
+
+   - AI-generated content warnings
+
+   - Privacy notices
+
+   - Cookie consent
+
+---
+
+## 7. Cursor AI Commands
+
+### When Asked to Implement Features:
+
+**ALWAYS respond with:**
+
+```
+Before implementing, I need to check compliance:
+
+1. Does this involve personal data? → Check Section 3.2
+
+2. Does this involve AI generation? → Check Section 3.3
+
+3. Does this require user consent? → Check Section 3.4
+
+4. Are there industry-specific requirements? → Check Section 3.3, Decision 9
+
+[After checking]
+
+✅ Compliance check complete. Proceeding with implementation.
+
+OR
+
+⚠️ Compliance issue detected: [specific issue]. Please review KI-Protokoll Section X.
+```
+
+### When Reviewing Existing Code:
+
+**ALWAYS check:**
+
+```
+Reviewing [filename] against KI-Protokoll:
+
+- Data processing: [compliant/needs attention]
+
+- AI transparency: [compliant/needs attention]
+
+- User rights: [compliant/needs attention]
+
+- Security: [compliant/needs attention]
+
+[If issues found]
+
+⚠️ Compliance gaps found:
+
+1. [Issue description + Protocol reference]
+
+2. [Issue description + Protocol reference]
+
+Recommended fixes:
+
+[List concrete code changes]
+```
+
+---
+
+## 8. Emergency Compliance Issues
+
+**IF YOU DETECT ANY OF THESE, FLAG IMMEDIATELY:**
+
+🚨 **CRITICAL:**
+
+- Personal data sent to OpenAI without DPA
+
+- No user consent for data processing
+
+- Missing data deletion functionality
+
+- AI responses published without human approval
+
+- Sensitive data (health, legal) in logs or errors
+
+⚠️ **HIGH PRIORITY:**
+
+- Missing disclaimers on AI-generated content
+
+- No privacy policy or terms of service
+
+- Cookies without consent
+
+- No way for users to export their data
+
+---
+
+## 9. Documentation Requirements
+
+### For Every Feature Implementation:
+
+Create/update documentation in `/docs/compliance/`:
+
+- `IMPLEMENTATION_LOG.md` - Track all compliance-relevant changes
+
+- `DECISIONS_MADE.md` - Document compliance decisions
+
+- `OPEN_ISSUES.md` - Track remaining compliance gaps
+
+Format:
+
+```markdown
+## [Feature Name] - [Date]
+
+### Compliance Check:
+
+- Relevant Protocol Section: [X.X]
+
+- Data Processing: [Yes/No, Legal Basis]
+
+- AI Involvement: [Yes/No, Safeguards]
+
+- User Rights: [Implemented/Pending]
+
+### Implementation Notes:
+
+[Description]
+
+### Open Issues:
+
+[If any]
+```
+
+---
+
+## 10. Regular Compliance Reviews
+
+### Monthly:
+
+- Review all AI-generated responses (5% sample) for quality/bias
+
+- Check logs for any data leaks
+
+- Verify all DPAs are current
+
+### Quarterly:
+
+- Full code audit against KI-Protokoll
+
+- Update prompts based on feedback
+
+- Review and update legal documents if needed
+
+### Annually:
+
+- Complete security audit
+
+- Test incident response plan
+
+- Review and update entire KI-Protokoll
+
+---
+
+## 11. Quick Reference Card
+
+| Topic | Protocol Section | Key Requirement |
+
+|-------|-----------------|-----------------|
+
+| **AI Transparency** | 3.1 | Label AI-generated content |
+
+| **Data Minimization** | 3.2.6 | Collect only necessary data |
+
+| **OpenAI DPA** | 3.2.4 | Must be signed before launch |
+
+| **Human-in-Loop** | 3.3.7 | No auto-publishing of AI responses |
+
+| **User Rights** | 3.2.5 | Export, delete, access data |
+
+| **Medical/Legal** | 3.3.9 | Special guardrails required |
+
+| **Liability** | 3.4.10 | User responsible for final content |
+
+| **Privacy Policy** | 3.4.11 | Must be published before launch |
+
+---
+
+## 12. Contact for Compliance Questions
+
+**When uncertain:**
+
+1. Flag the issue with specific Protocol reference
+
+2. Document the question in `/docs/compliance/OPEN_ISSUES.md`
+
+3. Recommend consulting legal counsel if high-risk
+
+4. Do NOT proceed with implementation until clarified
+
+---
+
+## Final Instruction
+
+**Cursor AI:** 
+
+- Save this file as `.cursorrules` in project root
+
+- Always reference `/docs/compliance/KI_PROTOKOLL_EU_COMPLIANCE.md` before coding
+
+- When in doubt about compliance, ASK rather than assume
+
+- Compliance is NOT optional - it's a blocker for production launch
+
+**Remember:** Compliance protects users AND the business. Every compliance measure implemented is an investment in trust and legal safety.
+
