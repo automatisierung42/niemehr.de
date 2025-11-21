@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateHardConstraintPrompt } from '@/lib/config/aiRules';
 import { buildKiezPrompt } from '@/core/kiez/scoreEngine';
 import { prisma } from '@/lib/prisma';
+import { getContextualOpener } from '@/core/humanizers/openers';
+import { generateSignature, getEasterEggSignature, detectBusinessType } from '@/core/humanizers/signatures';
+import { getInvitationLine, getInvitationLineEnglish } from '@/core/humanizers/invitation';
+import { detectBusinessCategory } from '@/core/business/categories';
 
 // Anthropic (Claude) API Konfiguration - EINDEUTIG
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY;
@@ -22,6 +26,9 @@ interface GenerateResponsesRequest {
   businessName: string;
   languageCode: string;
   businessId?: string; // Optional: Für Kiez-Score Lookup
+  signatureNames?: string[]; // Optional: Namen für Signatur
+  businessType?: string; // Optional: Business-Typ für Signatur-Generierung
+  placeTypes?: string[]; // Optional: Google Place Types für Kategorie-Erkennung
 }
 
 // Response Interface
@@ -134,7 +141,10 @@ async function generateResponseForTone(
   businessName: string,
   languageCode: string,
   tone: 'friendly' | 'professional' | 'witty',
-  kiezScore?: number // Optional: Kiez-Score für Lokalkolorit-Anpassung
+  kiezScore?: number, // Optional: Kiez-Score für Lokalkolorit-Anpassung
+  signatureNames?: string[], // Optional: Namen für Signatur
+  businessType?: string, // Optional: Business-Typ
+  placeTypes?: string[] // Optional: Google Place Types
 ): Promise<string> {
   const reviewWordCount = countWords(reviewText);
   const targetLength = calculateTargetLength(reviewWordCount);
@@ -148,6 +158,33 @@ async function generateResponseForTone(
   
   // Kiez-Score Prompt hinzufügen (falls verfügbar)
   const kiezPrompt = kiezScore !== undefined ? buildKiezPrompt(kiezScore) : '';
+  
+  // Opener generieren (falls Kiez-Score verfügbar)
+  const opener = kiezScore !== undefined ? getContextualOpener(kiezScore, isPositive) : '';
+  
+  // Signatur generieren (falls Kiez-Score verfügbar)
+  const signature = kiezScore !== undefined 
+    ? generateSignature(kiezScore, businessName, businessType, signatureNames || [])
+    : '';
+  
+  // Easter Egg: Spezielle Signaturen für hohe Scores
+  const easterEggSignature = kiezScore !== undefined && kiezScore >= 80
+    ? getEasterEggSignature(detectBusinessType(businessName, businessType), kiezScore, signatureNames || [])
+    : null;
+  
+  const finalSignature = easterEggSignature || signature;
+  
+  // Easter Egg: "bester Döner ever" Detection
+  const hasBesterDoenerEver = reviewText.toLowerCase().includes('bester') && 
+    (reviewText.toLowerCase().includes('döner') || reviewText.toLowerCase().includes('kebab'));
+  
+  // Business-Kategorie erkennen für passende Einladung
+  const businessCategory = detectBusinessCategory(businessName, body.placeTypes);
+  const invitationLine = kiezScore !== undefined
+    ? (languageCode.toLowerCase() === 'en' 
+        ? getInvitationLineEnglish(businessCategory, kiezScore, isPositive)
+        : getInvitationLine(businessCategory, kiezScore, isPositive))
+    : '';
   
   const prompt = `Du bist die psychologische Review-Antwort-Engine von niemehr.de für "${businessName}".
 
@@ -171,9 +208,13 @@ ABSOLUTE REGELN (keine Ausnahme):
    - NIEMALS länger als das 1,5-fache der Original-Review (max ${Math.ceil(reviewWordCount * 1.5)} Wörter)
 
 4. STRUKTUR (immer exakt):
-   - Satz 1: Emotion des Kunden spiegeln (Dank oder Empathie)
+   ${opener ? `- OPENER: Beginne mit: "${opener}"` : '- Satz 1: Emotion des Kunden spiegeln (Dank oder Empathie)'}
    - Satz 2: Wertschätzung zeigen ODER konkrete Lösung nennen
-   - Satz 3 (falls Platz): persönliche Einladung + echter Name/Team (z.B. "Dein Max", "Deine Sarah", "Dr. Müller & Team")
+   ${hasBesterDoenerEver ? '- EASTER EGG: Review enthält "bester Döner ever" → Antwort: "Bester ever? Na dann legen wir nächstes Mal noch einen drauf!"' : ''}
+   ${invitationLine ? `- EINLADUNG: Verwende diese Einladungs-Zeile: "${invitationLine}"` : '- Satz 3 (falls Platz): persönliche Einladung (NICHT "Come back soon" bei Behörden/Anwälten/Bestattern!)'}
+   ${finalSignature ? `- SIGNATUR: Beende mit: "${finalSignature}"` : '- Signatur: echter Vorname oder "& Team"'}
+   
+   WICHTIG: Die Einladungs-Zeile ist bereits passend für die Business-Kategorie gewählt. Verwende sie EXAKT so.
 
 5. TON: 90% warm & freundlich, 10% professionell – niemals steif, abweisend oder belehrend
 
@@ -290,17 +331,36 @@ export async function POST(request: NextRequest) {
     let witty: string;
     let usedMock = false;
 
-    // Lade Kiez-Score aus Business (falls businessId vorhanden)
+    // Lade Kiez-Score und User-Daten aus Business (falls businessId vorhanden)
     let kiezScore: number | undefined = undefined;
+    let signatureNames: string[] = body.signatureNames || [];
+    let businessType: string | undefined = body.businessType;
+    
     if (body.businessId) {
       try {
         const business = await prisma.business.findUnique({
           where: { id: body.businessId },
-          select: { kiezScore: true },
+          select: { 
+            kiezScore: true,
+            userId: true,
+          },
         });
         kiezScore = business?.kiezScore ?? undefined;
+        
+        // Lade User-Daten für Signaturen (falls userId vorhanden)
+        if (business?.userId && signatureNames.length === 0) {
+          try {
+            const user = await prisma.user.findUnique({
+              where: { id: business.userId },
+              select: { signatureNames: true },
+            });
+            signatureNames = user?.signatureNames || [];
+          } catch (error) {
+            console.warn('[AI GENERATION] Konnte User-Daten nicht laden:', error);
+          }
+        }
       } catch (error) {
-        console.warn('[AI GENERATION] Konnte Kiez-Score nicht laden:', error);
+        console.warn('[AI GENERATION] Konnte Business-Daten nicht laden:', error);
         // Weiter ohne Kiez-Score
       }
     }
@@ -310,16 +370,18 @@ export async function POST(request: NextRequest) {
       try {
         console.log('[AI GENERATION] Starte Anthropic (Claude) API Calls für alle 3 Töne...');
         [friendly, professional, witty] = await Promise.all([
-          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'friendly', kiezScore),
+          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'friendly', kiezScore, signatureNames, businessType),
           generateResponseForTone(
             reviewText,
             reviewRating,
             businessName,
             languageCode,
             'professional',
-            kiezScore
+            kiezScore,
+            signatureNames,
+            businessType
           ),
-          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'witty', kiezScore),
+          generateResponseForTone(reviewText, reviewRating, businessName, languageCode, 'witty', kiezScore, signatureNames, businessType),
         ]);
         console.log('[AI GENERATION SUCCESS] Antworten für alle 3 strategischen Reviews erstellt und gesendet.');
       } catch (aiError: any) {
