@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 18.11.2025 – 24.11.2025
+## Investoren-Update: 19.11.2025 – 25.11.2025
 
-**Stand:** 24.11.2025
+**Stand:** 25.11.2025
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **24.11.2025 (Heute)**
+### **25.11.2025 (Heute)**
+📊 Daily Investor Update 24.11.2025 06:43
+
+
+
+### **24.11.2025**
 📊 Daily Investor Update 23.11.2025 06:40
+
 
 
 
@@ -22,15 +28,11 @@
 
 
 
+
 ### **22.11.2025**
 feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
 
 
-
-
-
-### **19.11.2025**
-✅ **Psychologische Review-Antwort-Engine v2.0 implementiert.** Komplette Überarbeitung der Review-Antwort-Generierung mit wissenschaftlich fundierten Regeln (Mudambi & Schuff 2010/2024, Galesic & Bosnjak 2022). Dynamische Längenanpassung basierend auf Review-Länge (8-70 Wörter je nach Original), exakte Sprachübereinstimmung (Deutsch → Deutsch, Türkisch → Türkisch, etc.), englische Einzeiler für nicht-DE/EN Reviews. Strukturierte Antworten: Emotion spiegeln → Wertschätzung/Lösung → Persönliche Einladung + Name. Spezialfälle implementiert: Negative Reviews (1-3 Sterne) mit Empathie + konkreter Lösung, Off-Topic Reviews mit freundlichem Humor, nur-Sterne Reviews ultra-kurz. API-Route `/api/ai/generate-responses` komplett überarbeitet mit neuen Prompts. Dokumentation aktualisiert: `review-response-rules-off-topic.md` und `bedienungsanleitung_niemehr.md` mit neuen Regeln. **Geschätzte Arbeitszeit:** 6 Stunden.
 
 
 
@@ -62,6 +64,12 @@ feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+<details>
+<summary><strong>KW 48 (24.11.2025 – 30.11.2025)</strong></summary>
+- 📊 Daily Investor Update 24.11.2025 06:43
+</details>
+
+
 
 
 <details>
@@ -78,6 +86,7 @@ feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
