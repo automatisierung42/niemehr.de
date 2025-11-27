@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 20.11.2025 – 26.11.2025
+## Investoren-Update: 21.11.2025 – 27.11.2025
 
-**Stand:** 26.11.2025
+**Stand:** 27.11.2025
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **26.11.2025 (Heute)**
+### **27.11.2025 (Heute)**
+📊 Daily Investor Update 26.11.2025 06:42
+
+
+
+### **26.11.2025**
 📊 Daily Investor Update 25.11.2025 06:43
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **24.11.2025**
 📊 Daily Investor Update 23.11.2025 06:40
+
 
 
 
@@ -37,8 +45,10 @@
 
 
 
+
 ### **22.11.2025**
 feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
+
 
 
 
@@ -74,6 +84,7 @@ feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
 
 <!-- KW_START -->
 
+
 <details>
 <summary><strong>KW 48 (24.11.2025 – 30.11.2025)</strong></summary>
 - 📊 Daily Investor Update 24.11.2025 06:43
@@ -96,6 +107,7 @@ feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
