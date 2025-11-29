@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 22.11.2025 – 28.11.2025
+## Investoren-Update: 23.11.2025 – 29.11.2025
 
-**Stand:** 28.11.2025
+**Stand:** 29.11.2025
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **28.11.2025 (Heute)**
+### **29.11.2025 (Heute)**
+📊 Daily Investor Update 28.11.2025 06:43
+
+
+
+### **28.11.2025**
 📊 Daily Investor Update 27.11.2025 06:43
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **26.11.2025**
 📊 Daily Investor Update 25.11.2025 06:43
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **24.11.2025**
 📊 Daily Investor Update 23.11.2025 06:40
-
-
-
-
-
-
-
-### **23.11.2025**
-📊 Daily Investor Update 22.11.2025 06:39
 
 
 
@@ -86,6 +86,7 @@
 
 
 
+
 <details>
 <summary><strong>KW 48 (24.11.2025 – 30.11.2025)</strong></summary>
 - 📊 Daily Investor Update 24.11.2025 06:43
@@ -108,6 +109,7 @@
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
