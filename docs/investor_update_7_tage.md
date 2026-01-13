@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 06.01.2026 – 12.01.2026
+## Investoren-Update: 07.01.2026 – 13.01.2026
 
-**Stand:** 12.01.2026
+**Stand:** 13.01.2026
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **12.01.2026 (Heute)**
+### **13.01.2026 (Heute)**
+📊 Daily Investor Update 12.01.2026 06:51
+
+
+
+### **12.01.2026**
 📊 Daily Investor Update 11.01.2026 06:46
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **10.01.2026**
 📊 Daily Investor Update 09.01.2026 06:48
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **08.01.2026**
 📊 Daily Investor Update 07.01.2026 06:48
-
-
-
-
-
-
-
-### **07.01.2026**
-📊 Daily Investor Update 06.01.2026 06:47
 
 
 
@@ -83,6 +83,12 @@
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+<details>
+<summary><strong>KW 3 (12.01.2026 – 18.01.2026)</strong></summary>
+- 📊 Daily Investor Update 12.01.2026 06:51
+</details>
+
+
 
 
 
@@ -166,6 +172,17 @@
 - 📊 Daily Investor Update 24.11.2025 06:43
 </details>
 
+<!-- KW_END -->
+
+---
+
+## Monatlicher Rückblick (älter als 8 Wochen)
+
+<!-- MONTH_START -->
+<details>
+<summary><strong>November 2025</strong></summary>
+
+
 
 
 
@@ -175,14 +192,9 @@
 - ✅ **Psychologische Review-Antwort-Engine v2.0 implementiert.** Komplette Überarbeitung der Review-Antwort-Generierung mit wissenschaftlich fundierten Regeln (Mudambi & Schuff 2010/2024, Galesic & Bosnjak 2022). Dynamische Längenanpassung basierend auf Review-Länge (8-70 Wörter je nach Original), exakte Sprachübereinstimmung (Deutsch → Deutsch, Türkisch → Türkisch, etc.), englische Einzeiler für nicht-DE/EN Reviews. Strukturierte Antworten: Emotion spiegeln → Wertschätzung/Lösung → Persönliche Einladung + Name. Spezialfälle implementiert: Negative Reviews (1-3 Sterne) mit Empathie + konkreter Lösung, Off-Topic Reviews mit freundlichem Humor, nur-Sterne Reviews ultra-kurz. API-Route `/api/ai/generate-responses` komplett überarbeitet mit neuen Prompts. Dokumentation aktualisiert: `review-response-rules-off-topic.md` und `bedienungsanleitung_niemehr.md` mit neuen Regeln. **Geschätzte Arbeitszeit:** 6 Stunden.
 - 🔄 **Krankheitsbedingt – Monitoring des Ist-Zustands.** Keine neuen Entwicklungen. System-Monitoring durchgeführt, alle Services laufen stabil. Compliance-Features und MVP-Grundgerüst funktionieren einwandfrei. **Geschätzte Arbeitszeit:** 0.5 Stunden.
 </details>
+</details>
 
-<!-- KW_END -->
 
----
-
-## Monatlicher Rückblick (älter als 8 Wochen)
-
-<!-- MONTH_START -->
 
 
 
