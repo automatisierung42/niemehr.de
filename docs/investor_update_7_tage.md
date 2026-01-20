@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 13.01.2026 – 19.01.2026
+## Investoren-Update: 14.01.2026 – 20.01.2026
 
-**Stand:** 19.01.2026
+**Stand:** 20.01.2026
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **19.01.2026 (Heute)**
+### **20.01.2026 (Heute)**
+📊 Daily Investor Update 19.01.2026 06:53
+
+
+
+### **19.01.2026**
 📊 Daily Investor Update 18.01.2026 06:45
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **17.01.2026**
 📊 Daily Investor Update 16.01.2026 06:47
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **15.01.2026**
 📊 Daily Investor Update 14.01.2026 06:48
-
-
-
-
-
-
-
-### **14.01.2026**
-📊 Daily Investor Update 13.01.2026 06:48
 
 
 
@@ -83,6 +83,12 @@
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+<details>
+<summary><strong>KW 4 (19.01.2026 – 25.01.2026)</strong></summary>
+- 📊 Daily Investor Update 19.01.2026 06:53
+</details>
+
+
 
 
 
@@ -166,18 +172,6 @@
 - 📊 Daily Investor Update 01.12.2025 06:48
 </details>
 
-
-
-
-
-
-
-
-<details>
-<summary><strong>KW 48 (24.11.2025 – 30.11.2025)</strong></summary>
-- 📊 Daily Investor Update 24.11.2025 06:43
-</details>
-
 <!-- KW_END -->
 
 ---
@@ -185,6 +179,7 @@
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
@@ -203,6 +198,20 @@
 - feat: TAG 2 komplett + Behörden werden nie wieder zum Wiederkommen aufgefordert
 - ✅ **Psychologische Review-Antwort-Engine v2.0 implementiert.** Komplette Überarbeitung der Review-Antwort-Generierung mit wissenschaftlich fundierten Regeln (Mudambi & Schuff 2010/2024, Galesic & Bosnjak 2022). Dynamische Längenanpassung basierend auf Review-Länge (8-70 Wörter je nach Original), exakte Sprachübereinstimmung (Deutsch → Deutsch, Türkisch → Türkisch, etc.), englische Einzeiler für nicht-DE/EN Reviews. Strukturierte Antworten: Emotion spiegeln → Wertschätzung/Lösung → Persönliche Einladung + Name. Spezialfälle implementiert: Negative Reviews (1-3 Sterne) mit Empathie + konkreter Lösung, Off-Topic Reviews mit freundlichem Humor, nur-Sterne Reviews ultra-kurz. API-Route `/api/ai/generate-responses` komplett überarbeitet mit neuen Prompts. Dokumentation aktualisiert: `review-response-rules-off-topic.md` und `bedienungsanleitung_niemehr.md` mit neuen Regeln. **Geschätzte Arbeitszeit:** 6 Stunden.
 - 🔄 **Krankheitsbedingt – Monitoring des Ist-Zustands.** Keine neuen Entwicklungen. System-Monitoring durchgeführt, alle Services laufen stabil. Compliance-Features und MVP-Grundgerüst funktionieren einwandfrei. **Geschätzte Arbeitszeit:** 0.5 Stunden.
+
+
+
+
+
+
+
+
+
+
+<details>
+<summary><strong>KW 48 (24.11.2025 – 30.11.2025)</strong></summary>
+- 📊 Daily Investor Update 24.11.2025 06:43
+</details>
 </details>
 </details>
 
