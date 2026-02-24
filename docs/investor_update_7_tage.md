@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 17.02.2026 – 23.02.2026
+## Investoren-Update: 18.02.2026 – 24.02.2026
 
-**Stand:** 23.02.2026
+**Stand:** 24.02.2026
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **23.02.2026 (Heute)**
+### **24.02.2026 (Heute)**
+📊 Daily Investor Update 23.02.2026 07:40
+
+
+
+### **23.02.2026**
 📊 Daily Investor Update 22.02.2026 07:08
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **21.02.2026**
 📊 Daily Investor Update 20.02.2026 07:12
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **19.02.2026**
 📊 Daily Investor Update 18.02.2026 07:37
-
-
-
-
-
-
-
-### **18.02.2026**
-📊 Daily Investor Update 17.02.2026 07:32
 
 
 
@@ -83,6 +83,12 @@
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+<details>
+<summary><strong>KW 9 (23.02.2026 – 01.03.2026)</strong></summary>
+- 📊 Daily Investor Update 23.02.2026 07:40
+</details>
+
+
 
 
 
@@ -166,18 +172,6 @@
 - 📊 Daily Investor Update 05.01.2026 06:55
 </details>
 
-
-
-
-
-
-
-
-<details>
-<summary><strong>KW 1 (29.12.2025 – 04.01.2026)</strong></summary>
-- 📊 Daily Investor Update 29.12.2025 06:50
-</details>
-
 <!-- KW_END -->
 
 ---
@@ -185,6 +179,7 @@
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
@@ -265,6 +260,20 @@
 <details>
 <summary><strong>KW 52 (22.12.2025 – 28.12.2025)</strong></summary>
 - 📊 Daily Investor Update 22.12.2025 06:46
+
+
+
+
+
+
+
+
+
+
+<details>
+<summary><strong>KW 1 (29.12.2025 – 04.01.2026)</strong></summary>
+- 📊 Daily Investor Update 29.12.2025 06:50
+</details>
 </details>
 </details>
 </details>
