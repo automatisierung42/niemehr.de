@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 24.03.2026 – 30.03.2026
+## Investoren-Update: 25.03.2026 – 31.03.2026
 
-**Stand:** 30.03.2026
+**Stand:** 31.03.2026
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **30.03.2026 (Heute)**
+### **31.03.2026 (Heute)**
+📊 Daily Investor Update 30.03.2026 09:05
+
+
+
+### **30.03.2026**
 📊 Daily Investor Update 29.03.2026 08:39
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **28.03.2026**
 📊 Daily Investor Update 27.03.2026 07:44
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **26.03.2026**
 📊 Daily Investor Update 25.03.2026 07:38
-
-
-
-
-
-
-
-### **25.03.2026**
-📊 Daily Investor Update 24.03.2026 07:37
 
 
 
@@ -83,6 +83,12 @@
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+<details>
+<summary><strong>KW 14 (30.03.2026 – 05.04.2026)</strong></summary>
+- 📊 Daily Investor Update 30.03.2026 09:05
+</details>
+
+
 
 
 
@@ -166,6 +172,17 @@
 - 📊 Daily Investor Update 09.02.2026 07:40
 </details>
 
+<!-- KW_END -->
+
+---
+
+## Monatlicher Rückblick (älter als 8 Wochen)
+
+<!-- MONTH_START -->
+<details>
+<summary><strong>Februar 2026</strong></summary>
+
+
 
 
 
@@ -177,14 +194,9 @@
 <summary><strong>KW 6 (02.02.2026 – 08.02.2026)</strong></summary>
 - 📊 Daily Investor Update 02.02.2026 07:38
 </details>
+</details>
 
-<!-- KW_END -->
 
----
-
-## Monatlicher Rückblick (älter als 8 Wochen)
-
-<!-- MONTH_START -->
 
 
 
