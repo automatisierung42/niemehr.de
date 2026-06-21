@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 14.06.2026 – 20.06.2026
+## Investoren-Update: 15.06.2026 – 21.06.2026
 
-**Stand:** 20.06.2026
+**Stand:** 21.06.2026
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **20.06.2026 (Heute)**
+### **21.06.2026 (Heute)**
+📊 Daily Investor Update 20.06.2026 10:31
+
+
+
+### **20.06.2026**
 📊 Daily Investor Update 19.06.2026 11:57
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **18.06.2026**
 📊 Daily Investor Update 17.06.2026 12:13
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **16.06.2026**
 📊 Daily Investor Update 15.06.2026 13:28
-
-
-
-
-
-
-
-### **15.06.2026**
-📊 Daily Investor Update 14.06.2026 10:52
 
 
 
@@ -83,6 +83,7 @@
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+
 
 
 
@@ -183,6 +184,7 @@
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
