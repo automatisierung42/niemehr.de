@@ -1,8 +1,8 @@
 # 📊 niemehr.de – Tagesübersicht der letzten 7 Tage
 
-## Investoren-Update: 14.07.2026 – 20.07.2026
+## Investoren-Update: 15.07.2026 – 21.07.2026
 
-**Stand:** 20.07.2026
+**Stand:** 21.07.2026
 **Berichtszeitraum:** 7 Tage  
 **Status:** ✅ Psychologische Review-Antwort-Engine v2.0 implementiert
 
@@ -11,8 +11,14 @@
 ## 📅 Tagesübersicht
 
 <!-- UPDATE_START -->
-### **20.07.2026 (Heute)**
+### **21.07.2026 (Heute)**
+📊 Daily Investor Update 20.07.2026 10:23
+
+
+
+### **20.07.2026**
 📊 Daily Investor Update 19.07.2026 09:38
+
 
 
 
@@ -22,8 +28,10 @@
 
 
 
+
 ### **18.07.2026**
 📊 Daily Investor Update 17.07.2026 09:31
+
 
 
 
@@ -37,17 +45,9 @@
 
 
 
+
 ### **16.07.2026**
 📊 Daily Investor Update 15.07.2026 09:27
-
-
-
-
-
-
-
-### **15.07.2026**
-📊 Daily Investor Update 14.07.2026 09:24
 
 
 
@@ -83,6 +83,12 @@
 ## Wöchentlicher Rückblick (letzte 8 Wochen)
 
 <!-- KW_START -->
+<details>
+<summary><strong>KW 30 (20.07.2026 – 26.07.2026)</strong></summary>
+- 📊 Daily Investor Update 20.07.2026 10:23
+</details>
+
+
 
 
 
@@ -166,18 +172,6 @@
 - 📊 Daily Investor Update 01.06.2026 12:36
 </details>
 
-
-
-
-
-
-
-
-<details>
-<summary><strong>KW 22 (25.05.2026 – 31.05.2026)</strong></summary>
-- 📊 Daily Investor Update 25.05.2026 11:09
-</details>
-
 <!-- KW_END -->
 
 ---
@@ -185,6 +179,7 @@
 ## Monatlicher Rückblick (älter als 8 Wochen)
 
 <!-- MONTH_START -->
+
 
 
 
@@ -245,6 +240,20 @@
 <details>
 <summary><strong>KW 21 (18.05.2026 – 24.05.2026)</strong></summary>
 - 📊 Daily Investor Update 18.05.2026 10:55
+
+
+
+
+
+
+
+
+
+
+<details>
+<summary><strong>KW 22 (25.05.2026 – 31.05.2026)</strong></summary>
+- 📊 Daily Investor Update 25.05.2026 11:09
+</details>
 </details>
 </details>
 </details>
